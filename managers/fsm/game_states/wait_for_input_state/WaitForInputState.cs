@@ -10,7 +10,8 @@ public partial class WaitForInputState : Node, IGameState
 
     private InputHandler _inputHandler;
     private StairManager _stairManager;
-    
+    private SaveLoadManager _saveLoadManager;
+
     private InventoryWindow _inventoryWindow;
 
     public void Initialize()
@@ -18,6 +19,8 @@ public partial class WaitForInputState : Node, IGameState
         _inputHandler = this.GetUnique<InputHandler>();
         _stairManager = this.GetUnique<StairManager>();
         _inventoryWindow = this.GetUnique<InventoryWindow>();
+        _saveLoadManager  = this.GetUnique<SaveLoadManager>();
+
         _inputHandler.MovementInputHandled += On_InputHandler_MovementInputHandled;
         _inputHandler.PickUpInputHandled += On_InputHandler_PickUpInputHandled;
         _inputHandler.ToggleInventoryWindowInputHandled += On_InputHandler_ToggleInventoryWindowInputHandled;
@@ -26,6 +29,13 @@ public partial class WaitForInputState : Node, IGameState
         _inputHandler.PutAwayInventoryObjectInputHandled += On_InputHandler_PutAwayInventoryObjectInputHandled;
         _inputHandler.GoUpStairInputHandled += On_InputHandler_GoUpStairInputHandled;
         _inputHandler.GoDownStairInputHandled += On_InputHandler_GoDownStairInputHandled;
+        _inputHandler.RestartGameInputHandled += On_InputHandler_RestartGameInputHandled;
+    }
+
+    private void On_InputHandler_RestartGameInputHandled()
+    {
+        _saveLoadManager.TryDeleteSavedFile();
+        GetTree().ChangeSceneToFile("res://scenes/forest/forest.tscn");
     }
 
     private void On_InputHandler_GoDownStairInputHandled()

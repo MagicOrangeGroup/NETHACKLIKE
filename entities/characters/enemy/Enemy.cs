@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public partial class Enemy : Character, ILateUpdateEntity
 {
+	public event Action SkeletonKingDied;
 	private AStarGridManager _aStarGridManager;
 
 	private List<ILateUpdateComponent> _lateUpdateComponents = new();
@@ -43,6 +44,10 @@ public partial class Enemy : Character, ILateUpdateEntity
 		_aStarGridManager.AStarGrid.SetPointSolid(GetCell(),false);
 		QueueFree();
 		GD.Print(_characterData.Name + " 被击败");
+
+		if (_characterData.Name == "骷髅王")
+			SkeletonKingDied.Invoke();
+
 		_isDead = true;
 	}
 

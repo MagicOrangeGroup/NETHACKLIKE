@@ -35,10 +35,10 @@ _mapData = ExtResource("2_24l8h")
 
 [node name="DungeonGenerator" parent="MapManager" index="0" instance=ExtResource("3_joqq1")]
 
-[node name="StairManager" parent="." index="6"]
+[node name="StairManager" parent="." index="7"]
 _previousScenePath = "res://scenes/dungeon_1/dungeon_1.tscn"
 
-[node name="EnemySpawner" parent="." index="7"]
+[node name="EnemySpawner" parent="." index="8"]
 _enemyScenes = {
 ExtResource("4_yw3fg"): 30.0,
 ExtResource("5_xrbku"): 50

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bh868wawqhqg3"]
+[gd_scene load_steps=27 format=3 uid="uid://bh868wawqhqg3"]
 
 [ext_resource type="PackedScene" uid="uid://b3cwkcb0vsdvs" path="res://managers/fsm/fsm.tscn" id="1_k5n0a"]
 [ext_resource type="Script" path="res://scenes/Main.cs" id="1_vj8hp"]
@@ -22,8 +22,10 @@
 [ext_resource type="Script" path="res://resources/character_data/player_data/PlayerData.cs" id="17_7dw1k"]
 [ext_resource type="PackedScene" uid="uid://1qkomyjfhvui" path="res://ui/inventory_window/inventory_window.tscn" id="18_g7qwv"]
 [ext_resource type="PackedScene" uid="uid://sk2elj2u55a6" path="res://ui/attribute_panel/attribute_panel.tscn" id="19_bvbht"]
+[ext_resource type="PackedScene" uid="uid://begi8c833rj6" path="res://ui/defeat_window/defeat_window.tscn" id="21_sp5o0"]
+[ext_resource type="PackedScene" uid="uid://bbdqcn4weyl65" path="res://ui/victory_window/victory_window.tscn" id="22_mac4n"]
 
-[sub_resource type="Resource" id="Resource_4esa2"]
+[sub_resource type="Resource" id="Resource_rcdp1"]
 resource_local_to_scene = true
 script = ExtResource("5_cnhv3")
 
@@ -59,7 +61,7 @@ unique_name_in_owner = true
 
 [node name="MapManager" parent="." instance=ExtResource("4_udxl8")]
 unique_name_in_owner = true
-_mapData = SubResource("Resource_4esa2")
+_mapData = SubResource("Resource_rcdp1")
 
 [node name="PickableObjectSpawner" parent="." instance=ExtResource("17_2pr2j")]
 unique_name_in_owner = true
@@ -123,6 +125,14 @@ _characterData = SubResource("Resource_tikjy")
 [node name="Camera2D" type="Camera2D" parent="GameViewportContainer/GameViewport/Player"]
 
 [node name="InventoryWindow" parent="GameViewportContainer/GameViewport" instance=ExtResource("18_g7qwv")]
+unique_name_in_owner = true
+visible = false
+
+[node name="DefeatWindow" parent="GameViewportContainer/GameViewport" instance=ExtResource("21_sp5o0")]
+unique_name_in_owner = true
+visible = false
+
+[node name="VictoryWindow" parent="GameViewportContainer/GameViewport" instance=ExtResource("22_mac4n")]
 unique_name_in_owner = true
 visible = false
 

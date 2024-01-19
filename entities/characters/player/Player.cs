@@ -5,6 +5,8 @@ using System.Linq;
 
 public partial class Player : Character
 {
+    public event Action DiedForSure;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -113,5 +115,7 @@ public partial class Player : Character
 
         GD.Print("玩家被击败");
         _isDead = true;
+
+        DiedForSure.Invoke();
     }
 }

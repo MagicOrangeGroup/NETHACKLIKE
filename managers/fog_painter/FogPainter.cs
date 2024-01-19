@@ -26,10 +26,11 @@ public partial class FogPainter : Node, ILoadable
 		if (!InitializeByLoadedData())
 		{
 			FullFillWithUnexploredFog();
-			await ToSignal(GetTree(), "process_frame");
-			RefreshFog();
 		}
-	}
+
+        await ToSignal(GetTree(), "process_frame");
+        RefreshFog();
+    }
 
 	public void Update()
 	{

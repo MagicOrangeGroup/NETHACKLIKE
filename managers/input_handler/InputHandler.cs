@@ -12,11 +12,15 @@ public partial class InputHandler : Node, IManager
     public event Action PutAwayInventoryObjectInputHandled;
     public event Action GoUpStairInputHandled;
     public event Action GoDownStairInputHandled;
+    public event Action RestartGameInputHandled;
 
     private MapData _mapData;
-    private Player _player;
     private CombatManager _combatManager;
+    private Player _player;
+
     private InventoryWindow _inventoryWindow;
+    private VictoryWindow _victoryWindow;
+    private DefeatWindow _defeatWindow;
 
     private Timer _interruptMovementTimer;
 
@@ -31,11 +35,16 @@ public partial class InputHandler : Node, IManager
         _combatManager = this.GetUnique<CombatManager>();
         _interruptMovementTimer = GetNode<Timer>("InterruptMovementTimer");
         _inventoryWindow = this.GetUnique<InventoryWindow>();
-         
+        _victoryWindow = this.GetUnique<VictoryWindow>();
+        _defeatWindow = this.GetUnique<DefeatWindow>();
     }
 
     public void Update()
     {
+        if (HandleRestartGameInput()) return;
+
+        if (_victoryWindow.Visible || _defeatWindow.Visible) return;
+
         if (_player.IsDead)
             return;
 
@@ -62,6 +71,19 @@ public partial class InputHandler : Node, IManager
         HandleMovementInput();
     }
 
+    private bool HandleRestartGameInput()
+    {
+        if (!_victoryWindow.Visible && !_defeatWindow.Visible)
+            return false;
+
+        if (Input.IsActionJustPressed("restart_game"))
+        {
+            RestartGameInputHandled.Invoke();
+            return true;
+        }
+        return false;
+    }
+
     private bool HandleGoDownStairInput()
     {
         if (Input.IsActionJustPressed("go_down_stair"))
@@ -71,6 +93,7 @@ public partial class InputHandler : Node, IManager
         }
         return false;
     }
+
     private bool HandleGoUpStairInput()
     {
         if (Input.IsActionJustPressed("go_up_stair"))

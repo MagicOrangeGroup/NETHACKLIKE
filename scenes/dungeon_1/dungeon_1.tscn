@@ -38,11 +38,11 @@ _mapData = ExtResource("2_ssd00")
 
 [node name="DungeonGenerator" parent="MapManager" index="0" instance=ExtResource("3_vd4e2")]
 
-[node name="StairManager" parent="." index="6"]
+[node name="StairManager" parent="." index="7"]
 _nextScenePath = "res://scenes/dungeon_2/dungeon_2.tscn"
 _previousScenePath = "res://scenes/forest/forest.tscn"
 
-[node name="EnemySpawner" parent="." index="7"]
+[node name="EnemySpawner" parent="." index="8"]
 _maxEnemies = 15
 _enemyScenes = {
 ExtResource("4_khfe5"): 50.0,

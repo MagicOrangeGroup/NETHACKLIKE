@@ -16,11 +16,13 @@ public partial class StartState : Node,IGameState
     private Player _player;
     private EnemySpawner _enemySpawner;
     private AStarGridManager _aStarGridManager;
-    private InventoryWindow _inventoryWindow;
-    private AttributePanel _attributePanel;
     private StairManager _stairManager;
     private SaveLoadManager _saveLoadManager;
     private PickableObjectSpawner _pickableObjectSpawner;
+    private InventoryWindow _inventoryWindow;
+    private AttributePanel _attributePanel;
+    private VictoryWindow _victoryWindow;
+    private DefeatWindow _defeatWindow;
 
     public async void Initialize()
     {
@@ -38,6 +40,8 @@ public partial class StartState : Node,IGameState
         _stairManager = this.GetUnique<StairManager>();
         _saveLoadManager = this.GetUnique<SaveLoadManager>();
         _pickableObjectSpawner = this.GetUnique<PickableObjectSpawner>();
+        _victoryWindow = this.GetUnique<VictoryWindow>();
+        _defeatWindow = this.GetUnique<DefeatWindow>();
 
         _saveLoadManager.Initialize();
         _inputHandler.Initialize();
@@ -46,6 +50,8 @@ public partial class StartState : Node,IGameState
         _pickableObjectSpawner.Initialize();
         _mapManager.Initialize();
         _inventoryWindow.Initialize();
+        _victoryWindow.Initialize();
+        _defeatWindow.Initialize();
         _attributePanel.Initialize();
         await ToSignal(GetTree(), "process_frame");
         _aStarGridManager.Initialize();
